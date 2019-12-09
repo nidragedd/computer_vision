@@ -1,0 +1,63 @@
+{% extends "master.html" %}
+
+{% block contentpage %}
+<h3 class="text-center">Object detection</h3>
+<div class='text-center'>
+    <p>Here are some pictures, pick one to try different SSD models on it and compare the results and see how they
+        perform.</p>
+</div>
+<div class='col-md-offset-2 col-md-8'>
+    <div class="carousel slide" data-ride="carousel" id="carouselImages">
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="row">
+                    <div class="text-center">
+                        <img class="img_content" src="{{ url_for('static', filename='data/images/' + firstid) }}"
+                             alt="First slide"/>
+                    </div>
+                </div>
+            </div>
+            {% for img_id in img_list %}
+            <div class="item">
+                <div class="row">
+                    <div class="text-center">
+                        <img class="img_content" src="{{ url_for('static', filename='data/images/' + img_id) }}"
+                             alt="Another slide"/>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <a data-slide="prev" href="#carouselImages" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
+        <a data-slide="next" href="#carouselImages" class="right carousel-control"><i
+                class="fa fa-chevron-right"></i></a>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-lg-12 form-group-lg">
+        <form id="detect_form" action="/do_img_detection" method="post">
+            <div class="text-center" style="margin-top:10px;">
+                <input type="hidden" name="picked_img_id" id="picked_img_id" value=""/>
+                <input type="hidden" name="picked_img_url" id="picked_img_url" value=""/>
+                <button type="button" class="btn btn-lg btn-success" onclick="detect_image()">Object Detection on this
+                    image!
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+        car_item_to_load =  {{ car_item }}
+        if (car_item_to_load != 0) {
+            $('#carouselImages').carousel(car_item_to_load)
+        }
+
+        function detect_image() {
+            $('#picked_img_url').val($('div.active div div img')[0].src)
+            $('#picked_img_id').val($('div.active').index())
+            $('#detect_form').submit()
+        }
+
+</script>
+{% endblock %}

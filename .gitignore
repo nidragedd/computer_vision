@@ -1,0 +1,8 @@
+*/*.pyc
+*.pyc
+.idea/*
+**/__pycache__/
+models/**/*.py
+models/**/*.prototxt
+models/**/*.caffemodel
+src/static/data/images
