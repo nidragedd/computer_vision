@@ -71,14 +71,16 @@ I have made the effort to propose the different functions within a webapp that y
 
 ### Download models
 Pre-trained models are heavy files so they are not committed within this repository. Here are the links you can use to download them:
-**TODO**
-https://github.com/chuanqi305/MobileNet-SSD
+| Model link | Github project link | Type | Network base | Input image size | Dataset trained on | mAP |
+|------------|---------------------|------|--------------|------------------|--------------------|-----|
+| [Link](https://drive.google.com/open?id=0B3gersZ2cHIxRm5PMWRoTkdHdHc)     | [Link](https://github.com/chuanqi305/MobileNet-SSD)           | SSD  | MobileNet v3   | 300  | PASCAL VOC0712 | 72.7% |
+| [Link](https://drive.google.com/file/d/0BzKzrI_SkD1_dUY1Ml9GRTFpUWc/view) | [Link](https://github.com/weiliu89/caffe/tree/ssd)            | SSD  | VGG16          | 300* | MSCOCO         | 25.1% |
+| [Link](https://drive.google.com/file/d/0BzKzrI_SkD1_dlJpZHJzOXd3MTg/view) | [Link](https://github.com/weiliu89/caffe/tree/ssd)            | SSD  | VGG16          | 512* | MSCOCO         | 28.8% |
+| [Link](https://drive.google.com/file/d/0BzKzrI_SkD1_a2NKQ2d1d043VXM/view) | [Link](https://github.com/weiliu89/caffe/tree/ssd)            | SSD  | VGG16          | 300* | ILSVRC16       | --    |
+| [Link](https://drive.google.com/file/d/0BzKzrI_SkD1_X2ZCLVgwLTgzaTQ/view) | [Link](https://github.com/weiliu89/caffe/tree/ssd)            | SSD  | VGG16          | 500* | ILSVRC15       | --    |
 
-vgg coco 300: https://drive.google.com/file/d/0BzKzrI_SkD1_dUY1Ml9GRTFpUWc/view
-512: https://drive.google.com/file/d/0BzKzrI_SkD1_dlJpZHJzOXd3MTg/view
+_Note:_: SSD300* and SSD512* are models that trained with data augmentation ([source](https://arxiv.org/pdf/1512.02325v4.pdf))
 
-vgg ilsvrc2016 300: https://drive.google.com/file/d/0BzKzrI_SkD1_a2NKQ2d1d043VXM/view
-15 500: https://drive.google.com/file/d/0BzKzrI_SkD1_X2ZCLVgwLTgzaTQ/view
 
 ### Notes
 * Single Shot Detectors (SSDs) and YOLO use a one-stage detector strategy.

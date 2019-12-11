@@ -7,3 +7,4 @@
 /models/**/*.caffemodel
 /models/**/*.gz
 src/static/data/images
+src/static/data/videos

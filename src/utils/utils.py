@@ -52,3 +52,18 @@ def get_list_img_files(dir_name):
                 file_list.append(a_file)
 
         return file_list
+
+
+def count_nb_frames(videostream):
+    """
+    Try to find the total number of frames given a video stream. -1 is returned if not able to find it
+    :param videostream: (imutils video stream element)
+    :return: nb of frames in video, -1 if not able to catch it
+    """
+    total = 0
+    try:
+        prop = cv2.CAP_PROP_FRAME_COUNT
+        total = int(videostream.get(prop))
+    except:
+        total = -1
+    return total
