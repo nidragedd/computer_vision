@@ -1,11 +1,18 @@
-import threading, cv2, time
-from src.detection.motion.livemotiondetector import SingleMotionDetector
-from src.streaming import concurrent
-from src.utils import utils
+"""
+This thread class is highly similar to the one that is used for live object detection. It uses a basic and simple
+single motion detector element to detect motion within a videostream.
+
+@author: nidragedd
+"""
+import threading
+import cv2
+import time
+from src.motion.singlemotiondetector import SingleMotionDetector
+from src.utils import utils, concurrent
 from src.utils import constants as cst
 
 
-class LiveReader(threading.Thread):
+class LiveMotionDetector(threading.Thread):
     """
     A thread that is launched to continuously read frames from input
     """
@@ -15,14 +22,16 @@ class LiveReader(threading.Thread):
         Constructor
         :param frame_count: (int) number of frames to read before starting motion detection
         :param videostream: (object) reference to the videostream object to start
+        :param lock: (object) reference to the thread lock to acquire
+        :param gray_lock: (object) reference to the thread lock to acquire for gray image
         """
         threading.Thread.__init__(self)
         self._frame_count = frame_count
         self._vs = videostream.start()
-        # Allow some warmup
-        time.sleep(2.0)
+        time.sleep(cst.VIDEOSTREAM_WARMUP)
         self._lock = lock
         self._gray_lock = gray_lock
+        self._status = cst.RUNNING_STREAM_STATUS
 
     def run(self):
         """
@@ -30,7 +39,7 @@ class LiveReader(threading.Thread):
         """
         single_motion_detector = SingleMotionDetector(accum_weight=0.1)
         total_nb_frames_read = 0
-        while True:
+        while True and self._status == cst.RUNNING_STREAM_STATUS:
             frame, gray = utils.get_converted_frame(self._vs)
             thresh = None
             utils.add_datetime_on_frame(frame)
@@ -53,11 +62,19 @@ class LiveReader(threading.Thread):
             single_motion_detector.update(gray)
             total_nb_frames_read += 1
             self._lock.acquire()
-            concurrent.output_frame = frame.copy()
+            concurrent.motion_detection_output_frame = frame.copy()
             self._lock.release()
 
             # If no motion then there is no threshold image to compute
             if thresh is not None:
                 self._gray_lock.acquire()
-                concurrent.output_frame_gray = thresh.copy()
+                concurrent.motion_detection_output_frame_gray = thresh.copy()
                 self._gray_lock.release()
+
+    def quit(self):
+        """
+        Expose a way to stop this thread once it has been started
+        """
+        print("Quit called in Live Motion Detector")
+        self._status = "quit"
+        self._vs.stop()

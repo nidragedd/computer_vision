@@ -1,0 +1,20 @@
+{% extends "master.html" %}
+
+{% block contentpage %}
+<h3 class="text-center">Object detection run on a specific image</h3>
+<div style="display:inline-block; margin:1em 1em 2em;">
+    <p class="text-center"><b><u>Original</u></b></p>
+    <img class="img_content" src="{{ img_url }}"  alt="First slide"/>
+</div>
+{% for img_data in images_data %}
+<div style="display:inline-block; margin:1em 1em 2em;">
+    <p class="text-center"><b><u>{{img_data[0]}}</u></b></p>
+    <img class="img_content" src="data:image/jpg;base64, {{ img_data[1] }}" alt="Detection with a model"/>
+</div>
+{% endfor %}
+<form id="goback_form" action="/img_carousel?car_item={{ img_id }}" method="post">
+    <div class="text-center" style="margin:10px auto 35px;">
+        <button type="submit" class="btn btn-lg btn-info">Go back to carousel</button>
+    </div>
+</form>
+{% endblock %}

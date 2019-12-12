@@ -1,9 +1,0 @@
-{% extends "master.html" %}
-
-{% block contentpage %}
-<h3 class="text-center">Live motion detection</h3>
-<div class='text-center'>
-    Threshold image: <img src="{{ url_for('video_feed_delta') }}">
-    Bounding boxes: <img src="{{ url_for('video_feed') }}">
-</div>
-{% endblock %}

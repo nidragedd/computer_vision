@@ -9,14 +9,19 @@ FONT_COLOR_RED = (0, 0, 255)
 FONT_COLOR_GREEN = (0, 255, 0)
 
 ####################################
-#   LIVE DETECTION
+#   LIVE STREAMING
 ####################################
-FRAME_RESIZED_VALUE = 400
+VIDEOSTREAM_WARMUP = 1.0
+RUNNING_STREAM_STATUS = "RUNNING"
+STREAM_MOTION = "STREAM_MOTION"
+STREAM_OBJECT = "STREAM_OBJECT"
+FRAME_RESIZED_VALUE = 600
 LIVE_MOTION_DETECTION_MIN_AREA = 300
 
 ####################################
 #   OBJECTS DETECTION
 ####################################
+CONFIDENCE_THRESHOLD = 0.2
 MODELS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, os.pardir))
 
 MODELS_PASCALVOC12 = os.path.join(MODELS_DIR, 'models', 'PascalVOC2012')

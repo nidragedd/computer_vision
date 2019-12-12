@@ -15,21 +15,36 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false"><span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <a class="navbar-brand" href="/"><i class="fa fa-fw fa-home"></i> Home</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/img_carousel?car_item=0"><i class="fa fa-fw fa-file-image-o"></i> Images</a></li>
-                <li><a href="/live"><i class="fa fa-fw fa-file-video-o"></i> Live motion detection</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Live streaming <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/object_detection_live"><i class="fa fa-fw fa-file-video-o"></i>
+                            Live object detection</a></li>
+                        <li><a class="dropdown-item" href="/motion_detection_live"><i class="fa fa-fw fa-file-video-o"></i>
+                            Live motion detection</a></li>
+                    </ul>
+                </li>
                 <li><a href="/about"><i class="fa fa-fw fa-question-circle"></i> About</a></li>
                 <li><a href="https://github.com/nidragedd"><i class="fa fa-fw fa-github"></i> Contact</a></li>
             </ul>
@@ -39,6 +54,12 @@
 <div style="margin-top:60px;">
 
     {% block contentpage %}
+    <div class="text-center">
+        Welcome to this Computer Vision webapp that allows you to try different things such as <i>Object Detection</i>,
+        <i>Semantic Segmentation</i>, <i>Pose Estimation</i>, and so on...<br /><br />
+        You can work with <i>Images</i> (they have to be available under the static/data/images folder within this web server)
+        or you can also launch live streaming with your webcam if you have one.
+    </div>
     {% endblock %}
 </div>
 <footer class="navbar-fixed-bottom footer">

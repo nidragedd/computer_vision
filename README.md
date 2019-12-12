@@ -20,7 +20,7 @@ conda env create -f environment.yml
 If you do not have/want to use conda for any reason, you can still setup your environment by running some `pip install`
 commands. Please refer to the `environment.yml` file to see what are the dependencies you will need to install.  
 Basically, this project requires **Python 3.7** in addition to common image manipulation packages (such as 
-[opencv](https://opencv.org/) (note that [numpy](https://www.numpy.org/) will be required), [PIL](https://pillow.readthedocs.io/en/stable/)).
+[opencv 4.x](https://opencv.org/) (note that [numpy](https://www.numpy.org/) will be required), [PIL](https://pillow.readthedocs.io/en/stable/)).
 
 There are those additional packages in order to expose our work within a webapp:
 * [Flask](https://palletsprojects.com/p/flask/): used as web application framework/engine to run the app over HTTP
@@ -33,10 +33,9 @@ Here is the structure of the project:
       |__ src       (python modules and scripts)
             |__ detection   (scripts called to perform object or motion detection)
                     |__ models      (contains models zoo for object & motion detection)
-                    |__ motion      (contains scripts for live motion detection)
                     |__ object      (contains scripts for object detection in pictures with pre-trained models)
+            |__ motion   (scripts called to do read & stream live motion detection)
             |__ static      (HTML static resources to serve through Flask)
-            |__ streaming   (scripts called to do read & stream live motion detection)
             |__ templates   (HTML templates to serve through Flask, this is the 'view' part)
             |__ utils       (python helper & utility functions)
             |__ webapp      (python files corresponding to the webapp: this is the 'controller' part)
@@ -54,7 +53,7 @@ Then go to http://0.0.0.0:3001/ or [http://localhost:3001/](http://localhost:300
 
 ---
 ## 2. CONTEXT & OBJECTIVES
-As a regular reader of Adrian Rosebrock [pyimagesearch blog](https://www.pyimagesearch.com/) I wanted to give a try to some of the great tutorials
+As a regular reader of Adrian Rosebrock [pyimagesearch blog](https://www.pyimagesearch.com/) or [learnopencv](https://www.learnopencv.com/), I wanted to give a try to some of the great tutorials
 but in such a way that everything remains available in a single place and, if and when possible, with factorized code.  
 That is why a lot of what you can read in this project comes from there (plus some additional research).  
 I have made the effort to propose the different functions within a webapp that you can run on your computer.
