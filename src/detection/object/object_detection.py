@@ -11,6 +11,8 @@ import time
 import numpy as np
 import cv2
 
+from src.utils import utils
+
 
 def object_detection_from_image(ssd_model, image, threshold_confidence):
     """
@@ -65,7 +67,7 @@ def object_detection_from_image(ssd_model, image, threshold_confidence):
 
                 # Draw label above label the rectangle when possible. If not, put it within the box
                 y = y_min - 15 if y_min - 15 > 15 else y_min + 15
-                cv2.putText(image, label, (x_min, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, ssd_model.get_color(idx), 2)
+                utils.add_text_on_frame(image, label, (x_min, y), ssd_model.get_color(idx))
 
     return image
 

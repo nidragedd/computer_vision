@@ -34,7 +34,21 @@ def add_datetime_on_frame(frame):
     """
     timestamp = datetime.now().strftime('%A %d %B %Y %I:%M:%S%p')
     corner_origin = (10, frame.shape[0] - 10)
-    cv2.putText(frame, timestamp, corner_origin, cv2.FONT_HERSHEY_SIMPLEX, 0.35, cst.FONT_COLOR_RED, 1)
+    add_text_on_frame(frame, timestamp, corner_origin, cst.FONT_COLOR_RED, font_scale=0.35)
+
+
+def add_text_on_frame(frame, label, xy_coords, color, font_scale=0.5, font_thickness=1):
+    """
+    Add given label on given frame at some x,y coordinates. The main goal of this function is to keep into a single
+    place the font face, scale and thickness
+    :param frame: the frame on which the text will be added
+    :param label: (string) text to add
+    :param xy_coords: (tuple of float) x and y coordinates
+    :param color: (int) a value representing a font color within OpenCV
+    :param font_scale: (float) scale of the font
+    :param font_thickness: (int) thickness of the font
+    """
+    cv2.putText(frame, label, xy_coords, cv2.FONT_HERSHEY_SIMPLEX, font_scale, color, font_thickness)
 
 
 def get_list_img_files(dir_name):
