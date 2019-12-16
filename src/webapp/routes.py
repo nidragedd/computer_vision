@@ -7,13 +7,13 @@ import os
 import cv2
 
 from src import app
-from src.detection.models import model_zoo
-from src.detection.object import object_detection
+from src.config import config
+from src.detection import object_detection
 from src.utils import utils, concurrent
 from src.utils import constants as cst
 from src.motion.livestreaming import LiveStreamer
 from src.motion.livemotiondetector import LiveMotionDetector
-from src.detection.liveobjectdetector import LiveObjectDetector
+from src.detection.live_object_detector import LiveObjectDetector
 
 live_motion_detector_t = None
 live_object_detector_t = None
@@ -50,7 +50,7 @@ def launch_obj_detection():
     model_names = []
     img_generated = []
 
-    for model_name, ssd_model in model_zoo.SSD_MODELS.items():
+    for model_name, ssd_model in config.pgconf.get_detection_models().items():
         model_names.append(model_name)
 
         # Read a brand new version of the image, detect with SSD model and show output image for this SSD
@@ -81,7 +81,7 @@ def livestream_object_detection():
     Display live object detection page
     """
     # TODO: here the object detection model should be something given as request argument or something like that
-    ssd_model = model_zoo.SSD_MODELS["MobileNet_300_PASCALVOC12"]
+    ssd_model = config.pgconf.get_detection_models()["MobileNet_300_PASCALVOC12"]
     stop_live_motion_stream()
     global live_object_detector_t
     if not live_object_detector_t:

@@ -1,0 +1,99 @@
+{
+  "detection": {
+    "models_dir_name": "../models/DETECTION",
+    "config_dir_name": "./detection",
+    "models": [
+      {
+        "name": "MobileNet_300_PASCALVOC12",
+        "folder": "MobileNet_SSD_300x300",
+        "type": "SSD",
+        "proto_file": "deploy.prototxt",
+        "weights_file": "MobileNetSSD_deploy.caffemodel",
+        "image_input_size": 300,
+        "trained_on_dataset": "PASCALVOC12"
+      },
+      {
+        "name": "VGG_300_COCO",
+        "folder": "VGGNet_SSD_300x300",
+        "type": "SSD",
+        "proto_file": "deploy.prototxt",
+        "weights_file": "VGG_coco_SSD_300x300_iter_400000.caffemodel",
+        "image_input_size": 300,
+        "trained_on_dataset": "COCO"
+      },
+      {
+        "name": "VGG_300_ILSVRC16",
+        "folder": "VGGNet_SSD_300x300",
+        "type": "SSD",
+        "proto_file": "deploy.prototxt",
+        "weights_file": "VGG_ILSVRC2016_SSD_300x300_iter_440000.caffemodel",
+        "image_input_size": 300,
+        "trained_on_dataset": "ILSVRC16"
+      },
+      {
+        "name": "InceptionV2_300_COCO",
+        "folder": "INCEPTIONV2_SSD_2018_01_28",
+        "type": "SSD",
+        "proto_file": "ssd_inception_v2_coco.pbtxt",
+        "weights_file": "frozen_inference_graph.pb",
+        "image_input_size": 300,
+        "trained_on_dataset": "COCO"
+      },
+      {
+        "name": "ResNet50_640_COCO",
+        "folder": "RESNET50_SSD_V1_640x640_COCO14_2018_07_03",
+        "type": "SSD",
+        "proto_file": "ssd_resnet50_v1_fpn_shared_box_predictor_640x640_coco14_sync.pbtxt",
+        "weights_file": "frozen_inference_graph.pb",
+        "image_input_size": 640,
+        "trained_on_dataset": "COCO"
+      },
+      {
+        "name": "MobileNetV2_300_COCO",
+        "folder": "MOBILENETV2_SSD_2018_03_29",
+        "type": "SSD",
+        "proto_file": "ssd_mobilenet_v2_coco_2018_03_29.pbtxt",
+        "weights_file": "frozen_inference_graph.pb",
+        "image_input_size": 300,
+        "trained_on_dataset": "COCO"
+      }
+    ],
+    "classes": {
+      "PASCALVOC12": "voc2012.names",
+      "COCO": "mscoco_labels.names",
+      "ILSVRC16": "ilsvrc16_labels.names"
+    }
+  },
+  "pose_estimation": {
+    "models_dir_name": "../models/POSE",
+    "config_dir_name": "./pose",
+    "models": [
+      {
+        "name": "OPENPOSE_COCO_CAFFE",
+        "folder": "OPENPOSE_CMU",
+        "proto_file": "pose_deploy_linevec.prototxt",
+        "weights_file": "pose_iter_440000.caffemodel",
+        "image_input_size": 368,
+        "trained_on_dataset": "COCO"
+      },
+      {
+        "name": "OPENPOSE_MPI_CAFFE",
+        "folder": "OPENPOSE_CMU",
+        "proto_file": "pose_deploy_linevec.prototxt",
+        "weights_file": "pose_iter_160000.caffemodel",
+        "image_input_size": 368,
+        "trained_on_dataset": "MPI"
+      }
+    ],
+    "classes": {
+      "COCO": "pose_coco_labels.names",
+      "MPI": "mpi_labels.names"
+    },
+    "pairs": {
+      "COCO": [[1, 2], [1, 5], [2, 3], [3, 4], [5, 6], [6, 7], [1, 8], [8, 9], [9, 10], [1, 11], [11, 12],
+        [12, 13], [1, 0], [0, 14], [14, 16], [0, 15], [15, 17]],
+      "MPI": [[0, 1], [1, 2], [2, 3], [3, 4], [1, 5], [5, 6], [6, 7],
+        [1, 14], [14, 8], [8, 9], [9, 10], [14, 11], [11, 12], [12, 13]]
+    }
+  }
+}

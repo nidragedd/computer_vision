@@ -2,9 +2,6 @@
 *.pyc
 .idea/*
 **/__pycache__/
-/models/**/*.py
-/models/**/*.prototxt
-/models/**/*.caffemodel
-/models/**/*.gz
+/models
 src/static/data/images
 src/static/data/videos

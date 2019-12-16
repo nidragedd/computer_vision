@@ -7,7 +7,7 @@ to detect object within a videostream.
 import threading
 import time
 
-from src.detection.object import object_detection
+from src.detection import object_detection
 from src.utils import utils, concurrent
 from src.utils import constants as cst
 
