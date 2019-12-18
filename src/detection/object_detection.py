@@ -38,7 +38,7 @@ def object_detection_from_image(ssd_model, image, threshold_confidence):
     blob = cv2.dnn.blobFromImage(img_resized, scalefactor=0.007843, size=(size, size), mean=(104, 117, 123))
 
     # Perform a forward pass in the network
-    logger.info('Computing object detections...')
+    logger.info('\tComputing object detections...')
     ssd_model.get_net().setInput(blob)
 
     # Forward pass seems to be faster when output_names are given
@@ -46,9 +46,9 @@ def object_detection_from_image(ssd_model, image, threshold_confidence):
     last_layer = get_last_layer_name(ssd_model.get_net())
     start = time.time()
     outs = ssd_model.get_net().forward(last_layer)
-    logger.info('Found {} predictions'.format(outs[0].shape[2]))
+    logger.info('\tFound {} predictions'.format(outs[0].shape[2]))
     end = time.time()
-    logger.info("Forward pass took {:.5} seconds".format(end - start))
+    logger.info("\tForward pass took {:.5} seconds".format(end - start))
 
     # Loop over detections and handle those who are above a confidence threshold value
     # Detections within SSD is 4D where:
@@ -64,7 +64,7 @@ def object_detection_from_image(ssd_model, image, threshold_confidence):
 
                 # Print and put a label for each detected class
                 label = '{}: {:.2f}%'.format(ssd_model.get_label(idx), confidence * 100)
-                logger.info('Found {} in picture!'.format(label))
+                logger.info('\t\tFound {} in picture!'.format(label))
                 cv2.rectangle(image, (x_min, y_min), (x_max, y_max), ssd_model.get_color(idx), 2)
 
                 # Draw label above label the rectangle when possible. If not, put it within the box
