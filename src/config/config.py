@@ -34,7 +34,7 @@ def parse_object_detection_image():
     ap.add_argument('-c', '--config-file', required=True, help="External configuration file (JSON format)")
     ap.add_argument('-l', '--log-file', required=True, help="External logging configuration file (JSON format)")
     ap.add_argument("-i", "--image", required=True, help="path to input image")
-    ap.add_argument("-t", "--confidence", type=float, default=0.1, help="minimum probability to filter weak detections")
+    ap.add_argument("-t", "--confidence", type=float, default=0.2, help="minimum probability to filter weak detections")
 
     return ap.parse_args()
 
@@ -49,7 +49,7 @@ def parse_object_detection_video():
     ap.add_argument('-l', '--log-file', required=True, help="External logging configuration file (JSON format)")
     ap.add_argument("-v", "--video", required=True, help="path to input video file")
     ap.add_argument("-m", "--model", required=True, help="key name for the model to use")
-    ap.add_argument("-t", "--confidence", type=float, default=0.1, help="minimum probability to filter weak detections")
+    ap.add_argument("-t", "--confidence", type=float, default=0.2, help="minimum probability to filter weak detections")
 
     return ap.parse_args()
 

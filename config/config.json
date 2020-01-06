@@ -49,6 +49,15 @@
         "trained_on_dataset": "COCO"
       },
       {
+        "name": "MobileNetV1_300_COCO",
+        "folder": "MOBILENETV1_SSD_2017_11_17",
+        "type": "SSD",
+        "proto_file": "ssd_mobilenet_v1_coco_2017_11_17.pbtxt",
+        "weights_file": "frozen_inference_graph.pb",
+        "image_input_size": 300,
+        "trained_on_dataset": "COCO"
+      },
+      {
         "name": "MobileNetV2_300_COCO",
         "folder": "MOBILENETV2_SSD_2018_03_29",
         "type": "SSD",

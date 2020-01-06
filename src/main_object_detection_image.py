@@ -10,7 +10,7 @@ import logging
 
 from src.config import config
 from src.config.pgconf import ProgramConfiguration
-from src.detection import object_detection
+from src.detection.object_detection import ImageObjectDetector
 
 logger = logging.getLogger("Object_Detection_Image")
 
@@ -26,12 +26,14 @@ if __name__ == '__main__':
 
     img_dir = config.pgconf.get_images_dir()
 
+    obj_detector = ImageObjectDetector()
+
     for model_name, ssd_model in config.pgconf.get_detection_models().items():
         logger.info("Working on object detection with SSD model '{}'".format(model_name))
 
         # Read a brand new version of the image, detect with SSD model and show output image for this SSD
         image = cv2.imread(os.path.join(img_dir, vars(args)["image"]))
-        image = object_detection.object_detection_from_image(ssd_model, image, vars(args)["confidence"])
+        image = obj_detector.detect_with_model(ssd_model, image, vars(args)["confidence"])
         cv2.imshow("Detection with SSD model {}".format(model_name), image)
 
     cv2.waitKey(0)

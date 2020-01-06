@@ -129,3 +129,5 @@ Pre-trained models are heavy files so they are not committed within this reposit
 |------------|------------|---------------------|----------|------------------|--------------------|
 | [Link](http://posefs1.perception.cs.cmu.edu/OpenPose/models/pose/mpi/pose_iter_160000.caffemodel)  | [Link](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/models/pose/mpi/pose_deploy_linevec.prototxt)  | [Link](https://github.com/CMU-Perceptual-Computing-Lab/openpose)  | VGG19 | 368 | COCO |
 | [Link](http://posefs1.perception.cs.cmu.edu/OpenPose/models/pose/coco/pose_iter_440000.caffemodel) | [Link](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/models/pose/coco/pose_deploy_linevec.prototxt) | [Link](https://github.com/CMU-Perceptual-Computing-Lab/openpose)  | VGG19 | 368 | COCO |
+
+_Note_: please note that OpenPose can be used in _"ACADEMIC OR NON-PROFIT ORGANIZATION NONCOMMERCIAL RESEARCH USE ONLY"_ (cf. [license file](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/LICENSE))

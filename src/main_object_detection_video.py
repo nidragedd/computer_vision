@@ -9,7 +9,7 @@ import logging
 
 from src.config import config
 from src.config.pgconf import ProgramConfiguration
-from src.detection import object_detection
+from src.detection.object_detection import ImageObjectDetector
 from src.utils import utils
 
 logger = logging.getLogger("Object_Detection_Video")
@@ -33,6 +33,8 @@ if __name__ == '__main__':
 
     logger.info("Found {} frames in the video".format(total_frames))
 
+    obj_detector = ImageObjectDetector()
+
     # Continuously reading the frames and pass each one into model detector
     while True:
         # Pick one frame from video. If not grabbed then we have reached the end of the video stream
@@ -41,7 +43,7 @@ if __name__ == '__main__':
             break
 
         # As for images, use detection model and confidence threshold
-        image = object_detection.object_detection_from_image(ssd_model, frame, vars(args)["confidence"])
+        image = obj_detector.detect_with_model(ssd_model, frame, vars(args)["confidence"])
 
         # Put image within a frame
         cv2.imshow("Video output", frame)

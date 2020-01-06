@@ -18,9 +18,12 @@ class CVModel(object):
         :param classes_file: (string) absolute path to the file that contains all classes
         """
         self._name = name
+        self._is_RGB_model = True
         model_type = model_file.split('.')[-1:][0]
+
         if model_type == 'caffemodel':
             self._net = cv2.dnn.readNetFromCaffe(proto_file, model_file)
+            self._is_RGB_model = False
         elif model_type == "pb":
             self._net = cv2.dnn.readNetFromTensorflow(model_file, proto_file)
         self._size = size
@@ -53,6 +56,14 @@ class CVModel(object):
         :return: (string) identifier of the model
         """
         return self._name
+
+    # noinspection PyPep8Naming
+    def is_RGB_model(self):
+        """
+        :return: True if the model has been trained with images in RGB format. If True, it might mean that we need to
+        convert from BGR to RGB before feeding into the network (for example with Tensorflow models)
+        """
+        return self._is_RGB_model
 
 
 class SSDModel(CVModel):
