@@ -38,7 +38,7 @@ class HumanPoseDetector(AbstractDetector):
         #   are all concatenated:
         #       - For COCO model it consists of 57 parts: 18 keypoint confidence Maps + 1 background
         #       + 19*2 Part Affinity Maps.
-        #       - Similarly, for MPI, it produces 44 points.
+        #       - Similarly, for MPII, it produces 44 points.
         #       ==> We use only the first few points which correspond to Keypoints.
         #   * 3rd & 4th dimension are respectively the height and width of the output map.
         image_height, image_width = self._image.shape[:2]
@@ -91,7 +91,9 @@ class HumanPoseDetector(AbstractDetector):
         Compute angle between some specific body parts
         :param keypoints: (array) positions (x, y) for each detected keypoint, None if not detected
         """
-        head_neck_chest = [keypoints[0], keypoints[1], keypoints[14]]
-        angle = geometry.get_angle_degree(head_neck_chest)
+        # Do it only if possible (eg. keypoints have been found with enough confidence
+        if keypoints[0] and keypoints[1] and keypoints[14]:
+            head_neck_chest = [keypoints[0], keypoints[1], keypoints[14]]
+            angle = geometry.get_angle_degree(head_neck_chest)
 
-        self._logger.info("\tAngle between head, neck and chest is {} degrees".format(np.degrees(angle)))
+            self._logger.info("\tAngle between head, neck and chest is {} degrees".format(np.degrees(angle)))
