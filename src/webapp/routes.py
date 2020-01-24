@@ -8,7 +8,7 @@ import cv2
 
 from src import app
 from src.config import config
-from src.detection import object_detection
+from src.detection.object_detection import ImageObjectDetector
 from src.utils import utils, concurrent
 from src.utils import constants as cst
 from src.motion.livestreaming import LiveStreamer
@@ -50,12 +50,14 @@ def launch_obj_detection():
     model_names = []
     img_generated = []
 
+    obj_detector = ImageObjectDetector()
+
     for model_name, ssd_model in config.pgconf.get_detection_models().items():
         model_names.append(model_name)
 
         # Read a brand new version of the image, detect with SSD model and show output image for this SSD
         image = cv2.imread(os.path.join(img_dir, img_url.split('/')[-1:][0]))
-        image = object_detection.object_detection_from_image(ssd_model, image, confidence)
+        image = obj_detector.detect_with_model(ssd_model, image, confidence)
 
         # Transform as byte array and then as Base64 image
         flag, encoded_image = cv2.imencode('.jpg', image)

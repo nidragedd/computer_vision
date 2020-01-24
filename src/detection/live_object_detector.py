@@ -8,6 +8,7 @@ import threading
 import time
 
 from src.detection import object_detection
+from src.detection.object_detection import ImageObjectDetector
 from src.utils import utils, concurrent
 from src.utils import constants as cst
 
@@ -35,9 +36,10 @@ class LiveObjectDetector(threading.Thread):
         """
         This replaces the output frame sent to server (for that we need to safely acquire a lock element)
         """
+        obj_detector = ImageObjectDetector()
         while True and self._status == cst.RUNNING_STREAM_STATUS:
             frame, _ = utils.get_converted_frame(self._vs)
-            image = object_detection.object_detection_from_image(self._model, frame, cst.CONFIDENCE_THRESHOLD)
+            image = obj_detector.detect_with_model(self._model, frame, cst.CONFIDENCE_THRESHOLD)
 
             self._lock.acquire()
             concurrent.object_detection_output_frame = image.copy()
